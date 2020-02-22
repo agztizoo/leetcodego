@@ -1,4 +1,4 @@
-package tree
+package utils
 
 type TreeNode struct {
     Val   int

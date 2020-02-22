@@ -42,11 +42,9 @@ func NilOrNot(v interface{}) {
 
 func main() {
 
-    input := "abba"
+    strs := "{}{}{}"
 
-    length := array.LengthOfLongestSubstring(input)
-
-    fmt.Println(length)
+    fmt.Println(array.ValidParentheses(strs))
 
 }
 

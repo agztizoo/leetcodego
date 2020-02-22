@@ -1,10 +1,12 @@
 package tree
 
-func isSymmetric(root *TreeNode) bool {
+import "github.com/leetcodego/utils"
+
+func isSymmetric(root *utils.TreeNode) bool {
     return (root == nil) || isSymmetricTree(root.Left, root.Right)
 }
 
-func isSymmetricTree(p *TreeNode, q *TreeNode) bool {
+func isSymmetricTree(p *utils.TreeNode, q *utils.TreeNode) bool {
     if (p == nil && q == nil) {
         return true;
     }
