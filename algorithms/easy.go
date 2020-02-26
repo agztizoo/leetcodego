@@ -1,8 +1,11 @@
 package algorithms
 
 import (
+    "bytes"
     "container/list"
+    "github.com/leetcodego/utils"
     "math"
+    "strconv"
 )
 
 //7. Reverse Integer
@@ -140,3 +143,107 @@ func ValidParentheses(str string) bool {
     }
     return stack.Len() == 0
 }
+
+//21. Merge Two Sorted Lists
+func MergeTwoLists(l1 *utils.ListNode, l2 *utils.ListNode) *utils.ListNode {
+    head := utils.NewListNode(0, nil)
+    curr := head
+    for l1 != nil && l2 != nil {
+        if l1.Val <= l2.Val {
+            curr.Next, l1 = l1, l1.Next
+        } else {
+            curr.Next, l2 = l2, l2.Next
+        }
+        curr = curr.Next
+    }
+    if l1 == nil {
+        curr.Next = l2
+    }
+    if l2 == nil {
+        curr.Next = l1
+    }
+    return head.Next
+}
+
+//28. Implement strStr()
+func StrStr(haystack string, needle string) int {
+    if needle == "" {
+        return 0
+    }
+    pLength := len(needle)
+    txtLength := len(haystack)
+    if haystack == "" || pLength > txtLength {
+        return -1
+    }
+    idx := 0
+    for idx + pLength <= txtLength {
+        if haystack[idx] == needle[0] && haystack[idx:idx + pLength] == needle{
+            return idx
+        }
+        idx ++
+    }
+    return -1
+}
+
+//35. Search Insert Position
+func SearchInsert(nums []int, target int) int {
+    if nums == nil || len(nums) == 0{
+        return 0
+    }
+    begin, end := 0, len(nums)
+    if nums[begin] > target {
+        return begin
+    }
+    if nums[end - 1] < target {
+        return end
+    }
+    for begin <= end  {
+        mid := (begin + end) / 2
+        if nums[mid] == target {
+            return mid
+        }
+        if target < nums[mid] {
+            if mid > 0 && target > nums[mid - 1] {
+                return mid
+            } else {
+                end = mid - 1
+            }
+        } else {
+            if mid < len(nums) - 1 && target < nums[mid + 1] {
+                return mid + 1
+            } else {
+                begin = mid + 1
+            }
+        }
+    }
+    return 0
+}
+
+//38. Count and Say
+func CountAndSay(n int) string {
+    if n == 1 {
+        return "1"
+    }
+    return explain(CountAndSay(n - 1))
+}
+
+func explain(str string) string {
+    count, c, res := 1, str[0], bytes.Buffer{}
+    for i := 1; i < len(str); i ++ {
+        if str[i] == c {
+            count ++
+        } else {
+            res.WriteString(strconv.Itoa(count))
+            res.WriteByte(c)
+            count, c = 1, str[i]
+        }
+    }
+    res.WriteString(strconv.Itoa(count))
+    res.WriteByte(c)
+    return res.String()
+}
+
+//53. Maximum Subarray
+//func MaxSubArray(nums []int) int {
+//
+//}
