@@ -1,17 +1,17 @@
 package tree
 
-import "github.com/leetcodego/utils"
+import . "github.com/leetcodego/utils"
 
-func isSymmetric(root *utils.TreeNode) bool {
+func isSymmetric(root *TreeNode) bool {
     return (root == nil) || isSymmetricTree(root.Left, root.Right)
 }
 
-func isSymmetricTree(p *utils.TreeNode, q *utils.TreeNode) bool {
-    if (p == nil && q == nil) {
-        return true;
+func isSymmetricTree(p *TreeNode, q *TreeNode) bool {
+    if p == nil && q == nil {
+        return true
     }
-    if (p == nil || q == nil) {
-        return false;
+    if p == nil || q == nil {
+        return false
     }
     sameLeft := isSymmetricTree(p.Left, q.Right)
     sameRight := isSymmetricTree(p.Right, q.Left)
