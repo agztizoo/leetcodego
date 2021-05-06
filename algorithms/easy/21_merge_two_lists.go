@@ -4,7 +4,7 @@ import (
 	. "github.com/leetcodego/utils"
 )
 
-// 21. Merge Two Sorted Lists
+// MergeTwoLists 21. Merge Two Sorted Lists
 func MergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
     head := NewListNode(0, nil)
     curr := head
