@@ -15,4 +15,5 @@ func letterCombinations(digits string) []string {
 	if digits == "" {
 		return []string{}
 	}
+	return nil
 }
